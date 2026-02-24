@@ -181,11 +181,11 @@ def trova_libro_piu_recente(libri: list[dict]) -> dict | None:
     if not libri:
         return None
     max = 0
-    if max > li
     for libro in libri:
-        libro_recente = max(libri["anno"])
-        return libro_recente
-    
+        if libro["anno"] > max:
+            max = libro["anno"]
+            libro_piu_recente = libro
+    return libro_piu_recente
 #Definisci `conta_per_genere(libri: list[dict]) -> dict[str, int]`:
 #   Restituisce un dizionario dove le chiavi sono i generi e i valori sono il numero di libri per genere.
 def conta_per_genere(libri: list[dict]) -> dict[str, int]:
