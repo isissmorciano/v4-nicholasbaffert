@@ -128,7 +128,6 @@
 
 import json
 
-
 libri = [
      {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
      {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
@@ -172,10 +171,45 @@ def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]:
 def calcola_media_anno(libri: list[dict]) -> float:
     if not libri:
         return 0.0
-
-
-
+    somma = sum(libro["anno"] for libro in libri)
+    return somma / len(libri)
 
 # 2. Definisci `trova_libro_piu_recente(libri: list[dict]) -> dict | None`:
 #    Restituisce il dizionario del libro con l'anno più alto.
 #    Se la lista è vuota, restituisce `None`.
+def trova_libro_piu_recente(libri: list[dict]) -> dict | None:
+    if not libri:
+        return None
+    for libro in libri:
+        return max(libro["anno"])
+    
+#Definisci `conta_per_genere(libri: list[dict]) -> dict[str, int]`:
+#   Restituisce un dizionario dove le chiavi sono i generi e i valori sono il numero di libri per genere.
+def conta_per_genere(libri: list[dict]) -> dict[str, int]:
+    conta_genere = {}
+    for libro in libri:
+        conta_genere = libro["genere"]
+    conta_genere["genere"] = conta_genere + 1
+    return conta_genere
+
+def main():
+# - Chiama `salva_biblioteca` per salvare su `"biblioteca.json"`.
+# - Chiama `carica_biblioteca` e stampa quanti libri sono stati caricati.
+    libri = [
+     {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+     {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+     {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+     {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+ ]
+    nome_file = "biblioteca.json"
+    salva_biblioteca(libri, nome_file)
+    libri_caricati = carica_biblioteca(nome_file)
+    print(f"I libri caricati sono: {len(libri_caricati)}")
+# - Usa i libri caricati nel Punto A.
+# - Filtra per `"Fantascienza"` e stampa quanti ne hai trovati e i loro titoli
+    fantascienza = 
+
+
+    if __name__ == "__main__":
+        main()
+
