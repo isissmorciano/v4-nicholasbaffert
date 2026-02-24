@@ -126,4 +126,56 @@
 # Libro 'Titanic' non trovato.
 # ```
 
+import json
 
+
+libri = [
+     {"titolo": "Il piccolo principe", "genere": "Romanzo", "anno": 1943},
+     {"titolo": "1984", "genere": "Fantascienza", "anno": 1949},
+     {"titolo": "Dune", "genere": "Fantascienza", "anno": 1965},
+     {"titolo": "Harry Potter", "genere": "Fantasy", "anno": 1997}
+ ]
+
+#1. Definisci `salva_biblioteca(libri: list[dict], nome_file: str) -> None`:
+#    Salva la lista in formato JSON con indentazione. Stampa un messaggio di conferma.
+def salva_biblioteca(libri: list[dict], nome_file: str) -> None:
+    try:
+        with open(nome_file, 'w') as f:
+            json.dump(libri, f, indent=4)
+        print(f"il file: '{nome_file}' e stato salvato con successo!.")
+    except IOError as e:
+        print(f"Errore durante il salvataggio del file: {e}") 
+
+# 2. Definisci `carica_biblioteca(nome_file: str) -> list[dict]`:
+#    Carica e restituisce la lista da JSON.
+#    Se il file non esiste, stampa un messaggio di errore e restituisce `[]`.
+def carica_biblioteca(nome_file: str) -> list[dict]:
+    try:
+        with open(nome_file, "r", encoding="utf-8") as file:
+            return json.load(file)     
+    except FileNotFoundError:
+        print(f"il file '{nome_file}' non e stato trovato..")
+        return []
+
+#1. Definisci `filtra_per_genere(libri: list[dict], genere: str) -> list[dict]`:
+#    Restituisce una nuova lista con solo i libri il cui campo `"genere"` corrisponde a quello passato.
+def filtra_per_genere(libri: list[dict], genere: str) -> list[dict]:
+    generi_filtrati = []
+    for libro in libri:
+        if libro["genere"] == genere:
+            generi_filtrati.append(libro)
+        return generi_filtrati
+    
+#1. Definisci `calcola_media_anno(libri: list[dict]) -> float`:
+#    Restituisce la media degli anni di pubblicazione come `float`.
+#    Se la lista è vuota, restituisce `0.0`.
+def calcola_media_anno(libri: list[dict]) -> float:
+    if not libri:
+        return 0.0
+
+
+
+
+# 2. Definisci `trova_libro_piu_recente(libri: list[dict]) -> dict | None`:
+#    Restituisce il dizionario del libro con l'anno più alto.
+#    Se la lista è vuota, restituisce `None`.
