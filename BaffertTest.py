@@ -180,8 +180,11 @@ def calcola_media_anno(libri: list[dict]) -> float:
 def trova_libro_piu_recente(libri: list[dict]) -> dict | None:
     if not libri:
         return None
+    max = 0
+    if max > li
     for libro in libri:
-        return max(libro["anno"])
+        libro_recente = max(libri["anno"])
+        return libro_recente
     
 #Definisci `conta_per_genere(libri: list[dict]) -> dict[str, int]`:
 #   Restituisce un dizionario dove le chiavi sono i generi e i valori sono il numero di libri per genere.
@@ -189,7 +192,7 @@ def conta_per_genere(libri: list[dict]) -> dict[str, int]:
     conta_genere = {}
     for libro in libri:
         conta_genere = libro["genere"]
-    conta_genere["genere"] = conta_genere + 1
+    conta_genere["genere"] = conta_genere["genere"] + 1
     return conta_genere
 
 def main():
@@ -207,7 +210,7 @@ def main():
     print(f"I libri caricati sono: {len(libri_caricati)}")
 # - Usa i libri caricati nel Punto A.
 # - Filtra per `"Fantascienza"` e stampa quanti ne hai trovati e i loro titoli
-    Fantascienza = filtra_per_genere()
+    Fantascienza = filtra_per_genere(libri_caricati, "Fantascienza")
     print(f"I libri di fantascienza sono: {len(Fantascienza)}")
 #Chiama entrambe le funzioni sui libri caricati e stampa i risultati.
     media_anno = calcola_media_anno(libri_caricati)
